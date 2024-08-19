@@ -1,4 +1,4 @@
-# Spring Boot testcontainers project
+# Spring Boot Testcontainers project
 
 A Spring Boot project to demonstrate the use of testcontainers to implement integration tests with external systems 
 
@@ -18,14 +18,25 @@ This section provides an overview of the main features, necessary dependencies, 
 ## Main features
 
 The main features of this project are:
-- 
+- Message consumer from a RabbitMQ queue
+- Write the consumed messages to a Postgres database
+- Integration tests with external services using Testcontainers
+- Docker compose to launch external services (Postgres and RabbitMQ)
 
 ## Dependencies and requirements
 
 The following dependency are required to implement this project features:
 
 ```xml
-
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.amqp</groupId>
+    <artifactId>spring-rabbit-test</artifactId>
+    <scope>test</scope>
+</dependency>
 ```
 
 To launch and run the external services (Postgres, Prometheus and Grafana) in Docker containers, the following requirements are needed:
@@ -48,7 +59,7 @@ mvn spring-boot:run
 
 The application will be available at [http://localhost:8080](http://localhost:8080).
 
-The external services (ADD SERVICE NAMES HERE) configured in the [docker-compose.yaml](docker-compose.yaml) file will automatically be launched due to the `spring-boot-docker-compose` dependency.
+The external services (Postgres and RabbitMQ) configured in the [docker-compose.yaml](docker-compose.yaml) file will automatically be launched due to the `spring-boot-docker-compose` dependency.
 
 In any case, the external services can also be launched manually by running on of the following command:
 
@@ -60,5 +71,5 @@ docker compose up -d
 ```shell
 # Start a specific external service 
 docker compose up -d <service-name>
-# Replace <service-name> with the service you want to start (ADD SERVICE NAMES HERE)
+# Replace <service-name> with the service you want to start (postgres or rabbitmq)
 ```
