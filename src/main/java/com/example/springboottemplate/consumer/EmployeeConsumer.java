@@ -1,6 +1,6 @@
 package com.example.springboottemplate.consumer;
 
-import com.example.springboottemplate.dto.CreateEmployeeDto;
+import com.example.springboottemplate.dto.CreateUpdateEmployeeDto;
 import com.example.springboottemplate.service.EmployeeService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -18,8 +18,8 @@ public class EmployeeConsumer {
     }
 
     @RabbitListener(queues = {"${rabbitmq.queue.name}"})
-    public void consumeEmployee(@Payload CreateEmployeeDto createEmployeeDto) {
-        System.out.println("Message " + createEmployeeDto + "  " + LocalDateTime.now());
-        employeeService.saveEmployee(createEmployeeDto);
+    public void consumeEmployee(@Payload CreateUpdateEmployeeDto createUpdateEmployeeDto) {
+        System.out.println("Message " + createUpdateEmployeeDto + "  " + LocalDateTime.now());
+        employeeService.saveEmployee(createUpdateEmployeeDto);
     }
 }

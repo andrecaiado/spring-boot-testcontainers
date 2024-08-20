@@ -1,6 +1,7 @@
 package com.example.springboottemplate.controller;
 
-import com.example.springboottemplate.dto.CreateEmployeeDto;
+import com.example.springboottemplate.dto.CreateUpdateEmployeeDto;
+import com.example.springboottemplate.dto.EmployeeDto;
 import com.example.springboottemplate.entity.Employee;
 import com.example.springboottemplate.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class EmployeeController {
      * @return List of Employees
      */
     @GetMapping("/")
-    public ResponseEntity<List<Employee>> getAllEmployees(){
+    public ResponseEntity<List<EmployeeDto>> getAllEmployees(){
         return ResponseEntity.ok().body(employeeService.getAllEmployees());
     }
 
@@ -37,7 +38,7 @@ public class EmployeeController {
      * @return Employee with the given id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id)
+    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable Integer id)
     {
         return ResponseEntity.ok().body(employeeService.getEmployeeById(id));
     }
@@ -50,22 +51,22 @@ public class EmployeeController {
      * @return Saved Employee entity
      */
     @PostMapping("/")
-    public ResponseEntity<Employee> saveEmployee(@RequestBody CreateEmployeeDto employee)
+    public ResponseEntity<EmployeeDto> saveEmployee(@RequestBody CreateUpdateEmployeeDto employee)
     {
         return ResponseEntity.ok().body(employeeService.saveEmployee(employee));
     }
 
     /**
      * This method is called when a PUT request is made
-     * URL: localhost:8080/employee/v1/
+     * URL: localhost:8080/employee/v1/1 (or any other id)
      * Purpose: Update an Employee entity
      * @param employee - Employee entity to be updated
      * @return Updated Employee
      */
-    @PutMapping("/")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee)
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Integer id, @RequestBody CreateUpdateEmployeeDto employee)
     {
-        return ResponseEntity.ok().body(employeeService.updateEmployee(employee));
+        return ResponseEntity.ok().body(employeeService.updateEmployee(id, employee));
     }
 
     /**
