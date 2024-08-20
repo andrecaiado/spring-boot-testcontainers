@@ -10,6 +10,7 @@ This README file will focus on the testcontainers features implementation. For m
     - [Main features](#main-features)
     - [Dependencies and requirements](#dependencies-and-requirements)
     - [Run the project](#run-the-project)
+- [RabbitMQ configuration](#rabbitmq-configuration)
 
 # Getting Started
 
@@ -73,3 +74,27 @@ docker compose up -d
 docker compose up -d <service-name>
 # Replace <service-name> with the service you want to start (postgres or rabbitmq)
 ```
+
+# RabbitMQ configuration
+
+The RabbitMQ service was added and configured in the [docker-compose.yaml](docker-compose.yaml). The service will automatically be launched when the project is started because of the `spring-boot-docker-compose` dependency.
+
+On startup, 2 configuration files are mounted to the container:
+
+- [rabbitmq.config](docker/rabbitmq/rabbitmq.config)
+- [definitions.json](docker/rabbitmq/definitions.json)
+
+The `rabbitmq.config` file is used to specify the location of the `definitions.json` file. 
+
+The `definitions.json` file contains the RabbitMQ configuration settings, such as:
+
+- Users and permissions
+- Virtual hosts
+- Exchanges
+- Queues
+- Bindings
+
+The RabbitMQ management console is available at [http://localhost:15672](http://localhost:15672) with the default credentials:
+
+- Username: guest
+- Password: guest
