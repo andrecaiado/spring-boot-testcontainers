@@ -28,7 +28,16 @@
   "policies": [],
   "queues": [
     {
-      "name": "sbtc-employees-queue",
+      "name": "sbtc-create-employees-queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "sbtc-update-employees-queue",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
@@ -52,9 +61,17 @@
     {
       "source": "sbtc-employees-exchange",
       "vhost": "/",
-      "destination": "sbtc-employees-queue",
+      "destination": "sbtc-create-employees-queue",
       "destination_type": "queue",
-      "routing_key": "sbtc-employees-routing-key",
+      "routing_key": "sbtc-create-employees-routing-key",
+      "arguments": {}
+    },
+    {
+      "source": "sbtc-employees-exchange",
+      "vhost": "/",
+      "destination": "sbtc-update-employees-queue",
+      "destination_type": "queue",
+      "routing_key": "sbtc-update-employees-routing-key",
       "arguments": {}
     }
   ]

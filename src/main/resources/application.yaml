@@ -16,7 +16,11 @@ spring:
 
 #RabbitMQ
 rabbitmq:
-  queue:
-    name: sbtc-employees-queue
+  employees:
     exchange: sbtc-employees-exchange
-    routing-key: sbtc-employees-routing-key
+    create:
+      queue: sbtc-create-employees-queue
+      routing-key: sbtc-create-employees-routing-key
+    update:
+      queue: sbtc-update-employees-queue
+      routing-key: sbtc-update-employees-routing-key
