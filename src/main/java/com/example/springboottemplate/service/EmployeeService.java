@@ -1,5 +1,6 @@
 package com.example.springboottemplate.service;
 
+import com.example.springboottemplate.dto.CreateEmployeeDto;
 import com.example.springboottemplate.entity.Employee;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,13 +33,28 @@ public class EmployeeService {
         return null;
     }
 
-    public Employee saveEmployee (Employee employee){
-        employee.setCreatedAt(LocalDateTime.now());
-        employee.setUpdatedAt(LocalDateTime.now());
+    public Employee saveEmployee (CreateEmployeeDto createEmployeeDto){
+        Employee employee = mapCreateEmployeeToEmployee(createEmployeeDto);
         Employee savedEmployee = employeeRepository.save(employee);
 
         log.info("Employee with id: {} saved successfully", employee.getId());
         return savedEmployee;
+    }
+
+    public Employee mapCreateEmployeeToEmployee (CreateEmployeeDto createEmployeeDto) {
+        Employee employee = new Employee();
+        employee.setFirstName(createEmployeeDto.getFirstName());
+        employee.setLastName(createEmployeeDto.getLastName());
+        employee.setAge(createEmployeeDto.getAge());
+        employee.setDesignation(createEmployeeDto.getDesignation());
+        employee.setPhoneNumber(createEmployeeDto.getPhoneNumber());
+        employee.setJoinedOn(createEmployeeDto.getJoinedOn());
+        employee.setAddress(createEmployeeDto.getAddress());
+        employee.setDateOfBirth(createEmployeeDto.getDateOfBirth());
+        employee.setCreatedAt(LocalDateTime.now());
+        employee.setUpdatedAt(LocalDateTime.now());
+
+        return employee;
     }
 
     public Employee updateEmployee (Employee employee) {

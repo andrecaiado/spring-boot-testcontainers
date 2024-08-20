@@ -1,5 +1,6 @@
 package com.example.springboottemplate.controller;
 
+import com.example.springboottemplate.dto.CreateEmployeeDto;
 import com.example.springboottemplate.entity.Employee;
 import com.example.springboottemplate.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,7 @@ public class EmployeeController {
      * @return Saved Employee entity
      */
     @PostMapping("/")
-    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee)
+    public ResponseEntity<Employee> saveEmployee(@RequestBody CreateEmployeeDto employee)
     {
         return ResponseEntity.ok().body(employeeService.saveEmployee(employee));
     }

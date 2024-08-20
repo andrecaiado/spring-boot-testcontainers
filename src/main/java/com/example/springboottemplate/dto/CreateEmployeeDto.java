@@ -3,6 +3,8 @@ package com.example.springboottemplate.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 public class CreateEmployeeDto {
@@ -11,6 +13,7 @@ public class CreateEmployeeDto {
     private Integer age;
     private String designation;
     private String phoneNumber;
+    private LocalDate joinedOn;
     private String address;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
 }
