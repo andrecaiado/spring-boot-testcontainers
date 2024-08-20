@@ -21,18 +21,16 @@ public class EmployeeConsumer {
 
     @RabbitListener(queues = {"${rabbitmq.employees.create.queue}"})
     public void consumeCreateEmployee(@Payload CreateUpdateEmployeeDto createUpdateEmployeeDto) {
-        System.out.println("Message " + createUpdateEmployeeDto + "  " + LocalDateTime.now());
+        System.out.println("Received message with payload: " + createUpdateEmployeeDto + " on " + LocalDateTime.now());
+        
         employeeService.saveEmployee(createUpdateEmployeeDto);
     }
 
     @RabbitListener(queues = {"${rabbitmq.employees.update.queue}"})
     public void consumeUpdateEmployee(@Payload CreateUpdateEmployeeDto createUpdateEmployeeDto, @Headers Map<String, Object> headers) {
-        System.out.println("Message " + createUpdateEmployeeDto + "  " + LocalDateTime.now());
-
-        // Example: Accessing a specific header
         Integer employeeId = Integer.valueOf(headers.get("employeeId").toString());
 
-        System.out.println("Received message with employee ID: " + employeeId);
+        System.out.println("Received message with employee ID: " + employeeId + " and payload: " + createUpdateEmployeeDto + " on " + LocalDateTime.now());
 
         employeeService.updateEmployee(employeeId, createUpdateEmployeeDto);
     }
