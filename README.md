@@ -10,7 +10,16 @@ This README file will focus on the testcontainers features implementation. For m
     - [Main features](#main-features)
     - [Dependencies and requirements](#dependencies-and-requirements)
     - [Run the project](#run-the-project)
-- [RabbitMQ configuration](#rabbitmq-configuration)
+- [System Under Test (SUT)](#system-under-test-sut)
+    - [Tests](#tests)
+        - [Test #1: RabbitMQ and Postgres](#test-1-rabbitmq-and-postgres)
+        - [Test #2: Postgres](#test-2-postgres)
+    - [Run the tests](#run-the-tests)
+- [External services configuration](#external-services-configuration)
+    - [RabbitMQ configuration](#rabbitmq-configuration)
+    - [Postgres configuration](#postgres-configuration)
+- [Testcontainers configuration](#testcontainers-configuration)
+- [Tests implementation](#tests-implementation)
 
 # Getting Started
 
@@ -75,7 +84,42 @@ docker compose up -d <service-name>
 # Replace <service-name> with the service you want to start (postgres or rabbitmq)
 ```
 
-# RabbitMQ configuration
+# System Under Test (SUT)
+
+The System Under Test (SUT) is a simple Spring Boot application with the following use cases:
+
+- Consume messages from a RabbitMQ queue and write them to a Postgres database.
+- Exposes endpoints to execute CRUD operations on the database.
+
+![sut.png](src%2Fmain%2Fresources%2Fsut.png)
+
+The integration tests to be implemented will use Testcontainers to launch the external services (Postgres and RabbitMQ) and test the application's interaction with these services.
+
+## Tests
+
+The following tests will be implemented:
+
+### Test #1: RabbitMQ and Postgres
+
+The first test will verify the application's ability to consume messages from a RabbitMQ queue and write them to a Postgres database.
+
+### Test #2: Postgres
+
+The second test will verify the application's ability to execute CRUD operations on the database.
+
+## Run the tests
+
+To run the integration tests, execute the following command:
+
+```shell
+mvn test
+```
+
+# External services configuration
+
+This section provides an overview of the configuration of the external services (Postgres and RabbitMQ).
+
+## RabbitMQ configuration
 
 The RabbitMQ service was added and configured in the [docker-compose.yaml](docker-compose.yaml). The service will automatically be launched when the project is started because of the `spring-boot-docker-compose` dependency.
 
@@ -98,3 +142,17 @@ The RabbitMQ management console is available at [http://localhost:15672](http://
 
 - Username: guest
 - Password: guest
+
+The application connection to the RabbitMQ service is configured in the [application.yml](src/main/resources/application.yml) file:
+
+## Postgres configuration
+
+The Postgres service was added and configured in the [docker-compose.yaml](docker-compose.yaml). The service will automatically be launched when the project is started because of the `spring-boot-docker-compose` dependency.
+
+# Testcontainers configuration
+
+This section provides an overview of the Testcontainers configuration.
+
+# Tests implementation
+
+This section provides an overview of the tests implementation with Testcontainers.

@@ -22,7 +22,7 @@ public class EmployeeConsumer {
     @RabbitListener(queues = {"${rabbitmq.employees.create.queue}"})
     public void consumeCreateEmployee(@Payload CreateUpdateEmployeeDto createUpdateEmployeeDto) {
         System.out.println("Received message with payload: " + createUpdateEmployeeDto + " on " + LocalDateTime.now());
-        
+
         employeeService.saveEmployee(createUpdateEmployeeDto);
     }
 
