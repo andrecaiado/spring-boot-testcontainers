@@ -13,14 +13,14 @@ services:
   rabbitmq:
     container_name: rabbitmq
     image: 'rabbitmq:3.13.6-management-alpine'
-    environment:
-      - 'RABBITMQ_DEFAULT_USER=guest'
-      - 'RABBITMQ_DEFAULT_PASS=guest'
     ports:
       - '5672:5672'
       - '15672:15672'
     networks:
       - spring-boot-testcontainers
+    volumes:
+      - './src/main/resources/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro'
+      - './src/main/resources/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro'
 
 networks:
   spring-boot-testcontainers:
