@@ -10,11 +10,8 @@ This README file will focus on the testcontainers features implementation. For m
     - [Main features](#main-features)
     - [Dependencies and requirements](#dependencies-and-requirements)
     - [Run the project](#run-the-project)
-- [System Under Test (SUT)](#system-under-test-sut)
-    - [Tests](#tests)
-        - [Test #1: RabbitMQ and Postgres](#test-1-rabbitmq-and-postgres)
-        - [Test #2: Postgres](#test-2-postgres)
     - [Run the tests](#run-the-tests)
+- [System Under Test (SUT)](#system-under-test-sut)
 - [External services configuration](#external-services-configuration)
     - [RabbitMQ configuration](#rabbitmq-configuration)
     - [Postgres configuration](#postgres-configuration)
@@ -67,6 +64,14 @@ To run the project, follow the steps below.
 mvn spring-boot:run
 ```
 
+## Run the tests
+
+To run the tests, follow the steps below.
+
+```shell
+mvn test
+```
+
 The application will be available at [http://localhost:8080](http://localhost:8080).
 
 The external services (Postgres and RabbitMQ) configured in the [docker-compose.yaml](docker-compose.yaml) file will automatically be launched due to the `spring-boot-docker-compose` dependency.
@@ -95,25 +100,11 @@ The System Under Test (SUT) is a simple Spring Boot application with the followi
 
 The integration tests to be implemented will use Testcontainers to launch the external services (Postgres and RabbitMQ) and test the application's interaction with these services.
 
-## Tests
+The tests will cover the following scenarios:
 
-The following tests will be implemented:
+- The application's ability to consume messages from a RabbitMQ queue and write them to a Postgres database.
 
-### Test #1: RabbitMQ and Postgres
-
-The first test will verify the application's ability to consume messages from a RabbitMQ queue and write them to a Postgres database.
-
-### Test #2: Postgres
-
-The second test will verify the application's ability to execute CRUD operations on the database.
-
-## Run the tests
-
-To run the integration tests, execute the following command:
-
-```shell
-mvn test
-```
+- The application's ability to execute CRUD operations on the database.
 
 # External services configuration
 
