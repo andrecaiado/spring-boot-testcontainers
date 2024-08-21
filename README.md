@@ -32,7 +32,7 @@ The main features of this project are:
 
 ## Dependencies and requirements
 
-The following dependency are required to implement this project features:
+The following dependency are required to implement this project's main features:
 
 ```xml
 <dependency>
@@ -43,6 +43,26 @@ The following dependency are required to implement this project features:
     <groupId>org.springframework.amqp</groupId>
     <artifactId>spring-rabbit-test</artifactId>
     <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.testcontainers</groupId>
+  <artifactId>junit-jupiter</artifactId>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-testcontainers</artifactId>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.testcontainers</groupId>
+  <artifactId>rabbitmq</artifactId>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.testcontainers</groupId>
+  <artifactId>postgresql</artifactId>
+  <scope>test</scope>
 </dependency>
 ```
 

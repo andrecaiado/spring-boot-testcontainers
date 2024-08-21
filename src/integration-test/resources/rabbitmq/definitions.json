@@ -1,0 +1,78 @@
+{
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "BMfxN8drrYcIqXZMr+pWTpDT0nMcOagMduLX0bjr4jwud/pN",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": [
+        "administrator"
+      ],
+      "limits": {}
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "parameters": [],
+  "policies": [],
+  "queues": [
+    {
+      "name": "sbtc-create-employees-queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "sbtc-update-employees-queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "sbtc-employees-exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "sbtc-employees-exchange",
+      "vhost": "/",
+      "destination": "sbtc-create-employees-queue",
+      "destination_type": "queue",
+      "routing_key": "sbtc-create-employees-routing-key",
+      "arguments": {}
+    },
+    {
+      "source": "sbtc-employees-exchange",
+      "vhost": "/",
+      "destination": "sbtc-update-employees-queue",
+      "destination_type": "queue",
+      "routing_key": "sbtc-update-employees-routing-key",
+      "arguments": {}
+    }
+  ]
+}
