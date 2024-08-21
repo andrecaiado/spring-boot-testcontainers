@@ -176,8 +176,7 @@ A datasource for the Postgres database is autoconfigured by Spring Boot due to:
 
 The Testcontainers were configured at the tests level. 
 
-Thefollowing annotations were used to configure the Testcontainers:
-
+The following annotations were used to configure the Testcontainers:
 
 - The `@Testcontainers` annotation is used to enable the Testcontainers support in the test class.
 
@@ -186,6 +185,8 @@ Thefollowing annotations were used to configure the Testcontainers:
 - The `@Container` annotation is used to define the Testcontainers that will be launched before the tests are executed.
 
 - The `@ServiceConnection` discovers the type of container that is annotated and creates a ConnectionDetails bean that can be used to connect to the service.
+
+When creating the container for the RabbitMQ service, the configurations and definitions file are copied to the RabbitMQ container using the `withCopyFileToContainer` method.
 
 Below is an example of the configuration of the RabbitMQ and Postgres containers that can be found in the [EmployeeRabbitMQIT.java](src/test/java/com/acaiado/employeerabbitmq/EmployeeRabbitMQIT.java) file:
 
