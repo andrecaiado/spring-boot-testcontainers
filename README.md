@@ -42,29 +42,29 @@ The following dependency are required to implement this project's main features:
     <artifactId>spring-boot-starter-amqp</artifactId>
 </dependency>
 <dependency>
-<groupId>org.springframework.amqp</groupId>
-<artifactId>spring-rabbit-test</artifactId>
-<scope>test</scope>
+    <groupId>org.springframework.amqp</groupId>
+    <artifactId>spring-rabbit-test</artifactId>
+    <scope>test</scope>
 </dependency>
 <dependency>
-<groupId>org.testcontainers</groupId>
-<artifactId>junit-jupiter</artifactId>
-<scope>test</scope>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <scope>test</scope>
 </dependency>
 <dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-testcontainers</artifactId>
-<scope>test</scope>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-testcontainers</artifactId>
+    <scope>test</scope>
 </dependency>
 <dependency>
-<groupId>org.testcontainers</groupId>
-<artifactId>rabbitmq</artifactId>
-<scope>test</scope>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>rabbitmq</artifactId>
+    <scope>test</scope>
 </dependency>
 <dependency>
-<groupId>org.testcontainers</groupId>
-<artifactId>postgresql</artifactId>
-<scope>test</scope>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>test</scope>
 </dependency>
 ```
 
