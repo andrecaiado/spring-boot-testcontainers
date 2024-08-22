@@ -8,13 +8,7 @@ spring:
       schemas: employee
       baselineOnMigrate: true
       enabled: true
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
 
-#RabbitMQ
 rabbitmq:
   employees:
     exchange: sbtc-employees-exchange

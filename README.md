@@ -132,9 +132,19 @@ The tests will cover the following scenarios:
 
 This section provides an overview of the configuration of the external services (Postgres and RabbitMQ).
 
+Because we are using `spring-boot-docker-compose` dependency, Spring Boot will take care of the following:
+
+- When the application is started, the services defined in the [docker-compose.yaml](docker-compose.yaml) file will be automatically started.
+
+- The connection details for the services will be created and made available to the application, that's why we don't need to specify any connection details in the application configuration files.
+
+**Note:** This also applies to the integration tests. The Testcontainers will be launched before the tests are executed, and the connection details will be made available to the tests.
+
+For more details on the `spring-boot-docker-compose` dependency, please refer to the [Docker Compose Support documentation](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1).
+
 ## RabbitMQ configuration
 
-The RabbitMQ service was added and configured in the [docker-compose.yaml](docker-compose.yaml). The service will automatically be launched when the project is started because of the `spring-boot-docker-compose` dependency.
+The RabbitMQ service was added and configured in the [docker-compose.yaml](docker-compose.yaml). 
 
 On startup, 2 configuration files are mounted to the container:
 
@@ -164,13 +174,7 @@ The application connection to the RabbitMQ service and the RabbitMQ queues, exch
 
 ## Postgres configuration
 
-The Postgres service was added and configured in the [docker-compose.yaml](docker-compose.yaml). The service will automatically be launched when the project is started because of the `spring-boot-docker-compose` dependency.
-
-A datasource for the Postgres database is autoconfigured by Spring Boot due to:
-
-- The `postgresql` dependency is added to the project and therefore is present on the classpath.
-
-- The `spring-boot-docker-compose` dependency is added to the project, which, beside launching the external service, also creates the connection details for the datasource.
+The Postgres service was added and configured in the [docker-compose.yaml](docker-compose.yaml).
 
 # Testcontainers configuration
 
@@ -184,11 +188,9 @@ The following annotations were used to configure the Testcontainers:
 
 - The `@Container` annotation is used to define the Testcontainers that will be launched before the tests are executed.
 
-- The `@ServiceConnection` discovers the type of container that is annotated and creates a ConnectionDetails bean that can be used to connect to the service.
+- The `@ServiceConnection` discovers the type of container that is annotated and creates a ConnectionDetails bean that can be used to connect to the service. The details of the connection are, once again, made available by the `spring-boot-docker-compose` dependency.
 
-When creating the container for the RabbitMQ service, the configurations and definitions file are copied to the RabbitMQ container using the `withCopyFileToContainer` method.
-
-Below is an example of the configuration of the RabbitMQ and Postgres containers that can be found in the [EmployeeRabbitMQIT.java](src/test/java/com/acaiado/employeerabbitmq/EmployeeRabbitMQIT.java) file:
+Below is an example of the configuration of the RabbitMQ and Postgres containers that can be found in the [EmployeeRabbitMQIT.java](src%2Fintegration-test%2Fjava%2Fcom.example.springboottemplate%2FEmployeeRabbitMQIT.java) file:
 
 ```java
 @ActiveProfiles("integration-test")
